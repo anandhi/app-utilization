@@ -1,1 +1,1 @@
-RichOnRails.com Chartkick example. See http://richonrails.com/articles/charting-with-chartkick for details.
+App Utilization rails app using chartKick
