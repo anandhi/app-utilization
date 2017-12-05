@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>App Utilization</title>
+  
+  <%= stylesheet_link_tag    'application', media: 'all' %>
+  <%= javascript_include_tag 'application' %>
+  <%= javascript_include_tag "http://www.google.com/jsapi", "chartkick" %>
+  <%= stylesheet_link_tag 'http://yandex.st/bootstrap/3.1.1/css/bootstrap.min.css' %>
+  <%= javascript_include_tag 'http://yandex.st/bootstrap/3.1.1/js/bootstrap.min.js' %>
+  
+  <%= csrf_meta_tags %>
+  <nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <a class="navbar-brand" href="/">Application Utilization</a>
+      </div>
+      <ul class="nav navbar-nav">
+        <li class="dropdown">
+          <a class="dropdown-toggle" data-toggle="dropdown" href="#"> Metrics
+            <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="/app_utilization/cpu?app_id=<%= params[:app_id] %>">CPU</a></li>
+            <li><a href="/app_utilization/disk?app_id=<%= params[:app_id] %>">Disk</a></li>
+            <li><a href="/app_utilization/network?app_id=<%= params[:app_id] %>">Network</a></li>
+          </ul>
+        </li>
+        <li class="dropdown">
+          <a class="dropdown-toggle" data-toggle="dropdown" href="#"> Team
+            <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="/<%= params[:controller]%>/<%= params[:action]%>?app_id=apl&instance_type=<%=params[:instance_type]%>">Accounting - APL </a></li>
+            <li><a href="/<%= params[:controller]%>/<%= params[:action]%>?app_id=maas&instance_type=<%=params[:instance_type]%>">Accounting - ASL </a></li>
+            <li><a href="/<%= params[:controller]%>/<%= params[:action]%>?app_id=sp&instance_type=<%=params[:instance_type]%>">MarketPlace</a></li>
+          </ul>
+        </li>
+        <li class="dropdown">
+          <a class="dropdown-toggle" data-toggle="dropdown" href="#"> Instance Class
+            <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="/<%= params[:controller]%>/<%= params[:action]%>?app_id=<%=params[:app_id]%>&instance_type=I">Class I </a></li>
+            <li><a href="/<%= params[:controller]%>/<%= params[:action]%>?app_id=<%=params[:app_id]%>&instance_type=C">Class C </a></li>
+            <li><a href="/<%= params[:controller]%>/<%= params[:action]%>?app_id=<%=params[:app_id]%>&instance_type=M">Class M</a></li>
+            <li><a href="/<%= params[:controller]%>/<%= params[:action]%>?app_id=<%=params[:app_id]%>&instance_type=D">Class D</a></li>
+          </ul>
+        </li>
+        <% @app_ids = %w(agent-service agent-service-relayer agm-orient-prod agreement-master agreement-master-dashboard agreement-master-mysql alc apl approval-console argus-db argus-metering-redis-server argus-optimus-prime argus-optimus-prime-relayer argus-redis-sentinel argus-redis-server audit-api audit-relayer avaya-service brand-hub callback-workflow case-manager checklist checklist-aggregator clairvoyant consent-store contact-master couchbase crm-campaign-console crm-contact-service data-governance disbursement-service disbursement-service-mysql dmcc-backend doc-ocr document-service drona-es drona-listman-db drona-listman-rest drona-ssd drupal-db ekl-sapphire-client empujador-kafka empujador-storm fa-aoes-api fa-atlas-api fa-atlas-db fa-atlas-relayer fa-azkaban fa-couch-db fa-dummy fa-fbflite fa-fbflite-db fa-hdfs-cluster fa-im-db fa-imbatch-redis-server fa-imbatch-relayer fa-inventory-view-api fa-inventory-view-db fa-inventory-view-relayer fa-l2dashboard fa-metron fa-onboarding fa-onboarding-relayer fa-operations-app fa-pegasus fa-pegasus-db fa-pegasus-relayer fa-penguin fa-penguin-db fa-redis-sentinel fa-redis-server fa-rekon-api fa-rekon-relayer fa-spark-cluster fa-stash-api fa-stash-relayer fa-zookeeper fbf-iris fbf-mediator fbf-metron-es-cluster fbflite-relayer fbflite-reporting-relayer file-storage firefly free-credits fulfilment-im-api fulfilment-im-relayer fulfilment-imbatch harmony hector hector-relayer heisenberg iris-relayer ivr-routing jarvis kingsman kingsman-relayer lending-external-api lending-relayer lending-workflow lending-wrapper-service loan-application loan-tracker lookup-service maas matrix meta-pref-onboarding-relayer metering-app metering-dashboard metering-hbase metering-report-app miami mpc-api-infra-docker myntra-accounting nikola nikola-mysql nikola-mysql-pre-prod nikola-pre-prod nikola-relayer nikola-relayer-pre-prod nostra npm-repo oauth-hystrix-dashboard oauth-nginx oauth-proxy oauth-redis oauth-register oauth-service offer-service ops-dashboard paperboy partner partner-datafeed partner-es partner-interface partner-relayer partners-console polaris-dashboard polaris-dashboard-db polaris-dashboard-relayer questionnaire ra-mec raclaims racommon radata rainmaker rapayable rareceivable rasl regulations-ui-console reporting-db returns-core-ui returns-dexter returns-scooby riddick rightnow-sync routing sa-mapi sa-mapi-internal sa-mapi-mysql sa-mapi-preprod sa-mapi-redis sa-mapi-relayer sapphire sbc scriber seller-cache-populator seller-capability seller-comm-archival seller-dashboard seller-dashboard-beta seller-dashboard-sanity seller-dashboard-support seller-facility seller-first seller-master seller-master-mysql seller-master-redis seller-master-relayer seller-metadata seller-onboarding-service seller-preference seller-profile seller-profile-relayer seller-referral seller-tier simon simon-mysql simon-relayer site-holidays skynet skynet-mysql skynet-relayer slc slm-bolt-db slm-bolt-service slm-catalog-feed-processor slm-console slm-entitylog-admin slm-entitylog-kafka slm-entitylog-processors slm-entitylog-sep slm-entitylog-spitfire slm-entitylog-spotlight slm-entitylog-zk slm-external-service slm-feed-processor slm-filestorage-hdfs slm-hoodoo slm-hoodoo-es-relationship slm-hoodoo-hbase slm-hoodoo-search slm-hoodoo-search-backup slm-listing-feed-processor slm-listing-service slm-migrator slm-niffler slm-nps slm-onboarding-be slm-policy-service slm-protego slm-recovery slm-redis-sentinel slm-redis-server slm-redis-test slm-retrocog slm-scheduler slm-service slm-spcms-db slm-sps slp sp-vrp-nps sp-vrp-orc spff-911 spff-apollo spff-azkaban spff-enricher spff-experiment spff-hawkeye spff-hystrix spff-jenkins spff-mpio spff-oms spff-order-api spff-order-api-docs spff-pulse spff-returns spff-scribe spff-sfs spff-sla spff-turbine srm-acl srm-admin srm-azkaban srm-couchdb srm-db-buzz srm-elasticsearch srm-hercules srm-ivr-controller-ui srm-relayer srm-ui-dashboard ss-reporting-ui ss-rules-relayers ssm-perf-stack suv-ui sync-db themis value-recovery web-view websocket-server weproxy weproxy-db wfm) %>
+        <li class="dropdown">
+          <a class="dropdown-toggle" data-toggle="dropdown" href="#"> App Id
+            <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <% @app_ids.each do |app_id| %>
+                <li>
+                  <a href="/<%= params[:controller]%>/<%= params[:action]%>?app_id=<%=app_id%>&instance_type=<%=params[:instance_type]%>">
+                    <%= app_id.sub('fk-', '').sub('sp-', ' ').sub('mp-', '').camelize %>
+                  </a>
+                </li>
+            <% end %>
+          </ul>
+        </li>
+        <% @app_groups = %w(accrual-consumer-adhoc accrual-reader alerts alpha-application-register alpha-invoice-register alpha-payment-advisor alpha-payment-register alpha-sellers-db-cluster alpha-sellers-db-cluster-1 apl-accrual-perf apl-accrual-reader-next apl-invoice-reader-next apl-orchestrator apl-shovel apl-shovel-processor apl-wallet-next application-reader application-register baltazar bank bank-disbursement callisto cheetah cheetah-shovel config-master couchDB couchbase creditor-db creditors-01 dbdc deadpool debtor-db debtors deployer dss-db-cluster dss-nginx dss-perf dss-unsigned ekl-accrual-db-cluster ekl-accrual-db-cluster-1 ekl-accruals ekl-apl-accrual-service ekl-application-register ekl-gl ekl-invoice-register ekl-ipa-db-cluster ekl-ipa-db-cluster-1 ekl-orchestrator ekl-payment-advisor ekl-payment-register europa fin-acct-statement financial-account fk-acrual-next fk-mp-adjustments-framework fk-sc-payment-b2b fk-sc-payment-b2c fk-shovel-next fk-wallstreet-scripts fki-accruals fki-db-cluster fki-invoice-register fkmp-accrual-db fkmp-accrual-db-1 fkmp-accrual-hbase-consumer fkmp-accrual-service fkmp-apl-orchestrator fkmp-application-register fkmp-db-cluster fkmp-db-cluster-1 fkmp-invoice-db-cluster fkmp-invoice-db-cluster-1 fkmp-invoice-hbase-consumer fkmp-invoice-mysql-relay fkmp-invoice-register fkmp-mediator fkmp-mediator-tracer fkmp-mysql-relay fkmp-payment-advisor fkmp-payment-register flash-mediator ftp-server fxmart-orchestrator generic-apl-accrual-service generic-application-register generic-db-cluster generic-db-cluster-1 generic-invoice-register generic-orchestrator generic-payment-advisor generic-payment-register gl gst-taxmaster hbase-accrual-adhoc-relayer hbase-invoice-relayer hsn-directory iaas iaas-db-cluster iaas-dss iaas-prod invoice-reader invoice-register kafka-cluster maas-next-db maas-nextenv misc-db-cluster mongodb mp-scp-migration mpca-application-db-cluster mpca-application-db-cluster-1 mpca-application-reader mpca-application-register mpca-application-register-db mpca-chetah-ro mpca-invoice mpca-invoice-db-cluster mpca-invoice-reader mpca-invoice-register mpca-mediator-1 mpca-mediator-2 mpca-mediator-db mpca-mediator-tracer mpca-payment-db-cluster mpca-payment-db-cluster-1 mpca-payment-reader mpca-payment-register mpca-payment-register-db mpca-rating myntra-mediator mysql-phpadmin next-apl-gst-taxmaster next-application-register next-baltazar next-db next-file next-fkmp-mediator next-fkmp-rating next-hsn-directory next-invoice-reader next-invoice-register next-mpca-mediator next-mpca-rating next-payment-advisor next-payment-reader next-payment-register next-sequencer next-ui next_fkmp-accrual_service nimbus-ui no.instancegroup orchestrator orchestrator-db orchestrator-next party-master party-master-old payment-advice-reader payment-advisor payment-reader payment-register perf-application-register perf-invoice-register perf-loader-agent perf-loader-agent-large perf-loader-server perf-loader-server-large perf-payment-register rating rating-mpca-db redis reporting reporting-ftp reporting-mysql-db ro-store-dn ro-store-nn ro-store-zk rundeck sc-accounting-ui sc-doc sc-payments-b2c-db sc-payments-b2c-db-slave sc-payments-mp-db sc-payments-mp-db-slave scawenger sequencer shovel-fk-shovel slave-mpca-payment-reader staging-register staging-register-zk staging-registry storm-cluster taxmaster test-instance wall-street-ui wallet ws-generic-db-01 ws-loader-agent ws-loader-server ws-scp-migration-db wsr-db-cluster wsr-db-cluster-1 wsr-scp-migration zookeeper) %>
+        <li class="dropdown">
+          <a class="dropdown-toggle" data-toggle="dropdown" href="#"> Instance Groups
+            <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <% @app_groups.each do |app_group| %>
+                <li>
+                  <a href="/<%= params[:controller]%>/<%= params[:action]%>?app_id=<%=params[:app_id]%>&instance_type=<%=params[:instance_type]%>&instance_group=<%=app_group%>">
+                    <%= app_group.camelize %>
+                  </a>
+                </li>
+            <% end %>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+</head>
+<body>
+  <div class="container">
+    <%= yield %>
+  </div>
+</body>
+</html>

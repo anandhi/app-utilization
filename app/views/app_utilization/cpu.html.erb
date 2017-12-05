@@ -1,0 +1,28 @@
+<% if !@app_id.nil? %>
+<div class="row">
+  <div class="col-xs-12">
+    <h3>CPU Utilization - Total v/s Actual Used </h3>
+    <b> Type: </b> <%= @instance_type %> Class
+    <b> AppId: </b> <%= @app_id%>
+    <b> Group: </b> <%= (@instance_group.split("-").join(" ").upcase) if @instance_group %>
+    <%= line_chart @cpu_data, label: "CPU", xtitle: 'Time', ytitle: 'Cores', points: false, discrete: true%>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-xs-12">
+    <h3>CPU Utilization % </h3>
+    <b> Type: </b> <%= @instance_type %> Class
+    <b> AppId: </b> <%= @app_id%>
+    <b> Group: </b> <%= (@instance_group.split("-").join(" ").upcase) if @instance_group %>
+    <%= line_chart @utilization_perc, label: "CPU", xtitle: 'Time', ytitle: 'percentage of usage', points: false, discrete: true%>
+  </div>
+
+</div>
+<% else %>
+    <div class="alert alert-danger">
+      <strong>Please Choose App Id or Team</strong>
+    </div>
+
+
+<% end %>
