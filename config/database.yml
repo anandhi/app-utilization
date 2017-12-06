@@ -38,6 +38,6 @@ production:
   database: chartkick_example
   pool: 20
   encoding: utf8
-  username: chartkick
-  password: example
+  username: root
+  password: root
   host:  localhost
