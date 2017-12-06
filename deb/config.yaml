@@ -4,6 +4,7 @@ DESCRIPTION: App Instance Utilization Matrics Tracker
 DEPENDS: ruby-flo (>= 1.9)
 MODULE: fk-app-utilization
 PORT: "31000"
+SSL_PORT: "31001"
 PADRINO_ENV: production
 DEPLOY_ENV: production
 SERVICE_NAME: fk-app-utilization
